@@ -1,0 +1,50 @@
+{
+  "users": [
+    {
+      "email": "a@a.com",
+      "password": "$2a$10$Mh6IhFQt0axfy88e4XVJ3uSeH086ShYiQZ9XvDZ3j0HcSMOfBK4fK",
+      "id": 1
+    },
+    {
+      "email": "b@b.com",
+      "password": "$2a$10$IgGYIf3CGohzZIsuZBPy0.uoV6dJf.Xo.F4B95bQTzegUhhdrnT3K",
+      "id": 2
+    },
+    {
+      "email": "c@c.com",
+      "password": "$2a$10$KbZfwBT6jKg4DjcC8KVSxugkIn9RefA2xwVAJVMyfZ05b2MVmPW3u",
+      "id": 3
+    },
+    {
+      "email": "d@d.com",
+      "password": "$2a$10$hSnBWqGfoqOJnTF.6E0DQunxB274nllW7WwcaK/207XF4hgm5NY/O",
+      "id": 4
+    },
+    {
+      "email": "e@e.com",
+      "password": "$2a$10$L.fE5ReAeC0Oi4N5SQO.GObQAEserTDPad3B1UGARE7rbmMOJ4juK",
+      "id": 5
+    },
+    {
+      "email": "r@r.com",
+      "password": "$2a$10$OfRQ9fmw5LjGJ8jVjJy3.e27oJs9v5pDDatnDhP4p.BGzfuhgzRUa",
+      "id": 6
+    },
+    {
+      "email": "ivan47@k.dl",
+      "password": "$2a$10$kjebDNgU7XdwD1Ui0nf4xOj5i//pBUL0VlhDadXZOnvf3KdXsOU4e",
+      "id": 7
+    },
+    {
+      "email": "gffg@jksd.cf",
+      "password": "$2a$10$X1TsuTQrR5u6iEqzGDjHXepmnR8LwkjN5q.eov/lK.sngJpSAq2G2",
+      "id": 8
+    },
+    {
+      "email": "afavf@mail.ru",
+      "password": "$2a$10$cMi2OxkmfPn6w.MesXinzekk9Wx4cHBlNiXr0JxKia9hqfUGB32C.",
+      "id": 9
+    }
+  ],
+  "contacts": []
+}
