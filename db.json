@@ -44,6 +44,16 @@
       "email": "afavf@mail.ru",
       "password": "$2a$10$cMi2OxkmfPn6w.MesXinzekk9Wx4cHBlNiXr0JxKia9hqfUGB32C.",
       "id": 9
+    },
+    {
+      "email": "ivan47@mk.ck",
+      "password": "$2a$10$RrhJkXps74FWDbTXOlOPX.GTta9ABcP67KklECW8y2im9IM.Q1Pz6",
+      "id": 10
+    },
+    {
+      "email": "ismagilov771@gmail.com",
+      "password": "$2a$10$/dOx3uOF7Ixi4RoAuKrJIutE3H4d9ssXIfZ.wVWAXrRmkCvoBlFIy",
+      "id": 11
     }
   ],
   "contacts": []

@@ -1,5 +1,9 @@
-import { AppDispatch, TRegistrationUser } from "../../utils/types";
-import { signUpApi } from "../api/api";
+import {
+  AppDispatch,
+  TCurrentUser,
+  TRegistrationUser,
+} from "../../utils/types";
+import { getCurrentUser, signUpApi } from "../api/api";
 
 export const REGISTRATION_REQUEST = "REGISTRATION_REQUEST";
 export const REGISTRATION_SUCCESS = "REGISTRATION_SUCCESS";
@@ -28,7 +32,7 @@ interface ILoginRequest {
 
 interface ILoginSuccess {
   readonly type: typeof LOGIN_SUCCESS;
-  readonly payload: TRegistrationUser;
+  readonly payload: TCurrentUser;
 }
 
 interface ILoginFailed {
@@ -65,6 +69,23 @@ export const SignUpThunk = (email: string, password: string) => {
         console.error("Error in signUpApi", error);
         return dispatch({
           type: REGISTRATION_FAILED,
+        });
+      });
+  };
+};
+
+export const AuthThunk = (token: string, userId: number) => {
+  return function (dispatch: AppDispatch) {
+    dispatch({ type: LOGIN_REQUEST });
+    return getCurrentUser(token, userId)
+      .then((res) => {
+        console.log("2");
+        dispatch({ type: LOGIN_SUCCESS, payload: res });
+      })
+      .catch((error) => {
+        console.error("Error in getCurrentUserApi", error);
+        return dispatch({
+          type: LOGIN_FAILED,
         });
       });
   };

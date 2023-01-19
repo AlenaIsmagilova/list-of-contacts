@@ -68,10 +68,9 @@ export const userReducer = (state = initialState, action: TAllActions) => {
         isLoading: false,
         isLogedIn: true,
         currentUser: {
-          email: action.payload.user.email,
-          id: action.payload.user.id,
+          email: action.payload.email,
+          id: action.payload.id,
         },
-        accessToken: action.payload.accessToken,
       };
     }
     case LOGIN_FAILED: {
