@@ -1,5 +1,5 @@
 import { TUser } from "../../utils/types";
-import { TAllActions } from "../actions/actions";
+import { TAllActions, USER_LOGOUT } from "../actions/actions";
 import {
   REGISTRATION_REQUEST,
   REGISTRATION_SUCCESS,
@@ -79,6 +79,19 @@ export const userReducer = (state = initialState, action: TAllActions) => {
         isLoading: false,
         isLogedIn: false,
         error: true,
+      };
+    }
+
+    case USER_LOGOUT: {
+      return {
+        ...state,
+        isLoading: false,
+        isLogedIn: false,
+        accessToken: "",
+        currentUser: {
+          email: "",
+          id: 0,
+        },
       };
     }
     default:

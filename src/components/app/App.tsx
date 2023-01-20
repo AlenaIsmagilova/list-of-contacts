@@ -4,7 +4,6 @@ import SignUp from "../../pages/SignUp/SignUp";
 import ContactsPage from "../../pages/Contacts/Contacts";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { baseUrl } from "../../constants/constants";
 import { AuthThunk } from "../../services/actions/actions";
 
 function App() {
@@ -21,19 +20,20 @@ function App() {
 
   return (
     <>
-      {/* {userLoader ? (
+      {userLoader ? (
         <p>...LOADING</p>
-      ) : ( */}
-      <Router>
-        <Switch>
-          <Route path="/" exact>
-            <ContactsPage />
-          </Route>
-          <Route path="/signup">
-            <SignUp />
-          </Route>
-        </Switch>
-      </Router>
+      ) : (
+        <Router>
+          <Switch>
+            <Route path="/" exact>
+              <ContactsPage />
+            </Route>
+            <Route path="/signup">
+              <SignUp />
+            </Route>
+          </Switch>
+        </Router>
+      )}
     </>
   );
 }

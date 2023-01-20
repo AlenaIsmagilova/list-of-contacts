@@ -13,6 +13,12 @@ export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILED = "LOGIN_FAILED";
 
+export const USER_LOGOUT = "USER_LOGOUT";
+
+interface IUserLogout {
+  readonly type: typeof USER_LOGOUT;
+}
+
 interface IRegistrationRequest {
   readonly type: typeof REGISTRATION_REQUEST;
 }
@@ -52,7 +58,8 @@ export type TAllActions =
   | IRegistrationFailed
   | ILoginRequest
   | ILoginSuccess
-  | ILoginFailed;
+  | ILoginFailed
+  | IUserLogout;
 
 export const SignUpThunk = (email: string, password: string) => {
   return function (dispatch: AppDispatch) {
