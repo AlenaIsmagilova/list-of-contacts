@@ -1,5 +1,5 @@
 import { TUser } from "../../utils/types";
-import { TAllActions, USER_LOGOUT } from "../actions/actions";
+import { TAllUserActions, USER_LOGOUT } from "../actions/actions";
 import {
   REGISTRATION_REQUEST,
   REGISTRATION_SUCCESS,
@@ -18,7 +18,7 @@ export type TState = {
 };
 
 export const initialState: TState = {
-  isLoading: true,
+  isLoading: false,
   error: false,
   isLogedIn: false,
   accessToken: "",
@@ -28,7 +28,7 @@ export const initialState: TState = {
   },
 };
 
-export const userReducer = (state = initialState, action: TAllActions) => {
+export const userReducer = (state = initialState, action: TAllUserActions) => {
   switch (action.type) {
     case REGISTRATION_REQUEST: {
       return {
@@ -68,9 +68,10 @@ export const userReducer = (state = initialState, action: TAllActions) => {
         isLoading: false,
         isLogedIn: true,
         currentUser: {
-          email: action.payload.email,
-          id: action.payload.id,
+          email: action.payload.user.email,
+          id: action.payload.user.id,
         },
+        accessToken: action.payload.accessToken,
       };
     }
     case LOGIN_FAILED: {

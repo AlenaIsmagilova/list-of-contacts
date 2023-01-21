@@ -1,26 +1,26 @@
 import { Button, Input } from "@mui/material";
-import React, { FC, FunctionComponent, useState } from "react";
+import React, { FC, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Contacts.module.css";
 import { USER_LOGOUT } from "../../services/actions/actions";
 
 export interface IContactsList {
+  id: number;
   firstname: string;
   secondname: string;
   phone_number: string;
+  userId: number;
 }
 
-export interface IContactsListProps {
-  contacts: IContactsList[];
-}
-
-const ContactsList: FC<IContactsListProps> = ({ contacts }) => {
+const ContactsList: FC = () => {
   const [inputValue, setInputValue] = useState({
     name: "",
     telNumber: "",
   });
-  const token = useSelector((store: any) => store.userReducer.accessToken);
+  const isLogedIn = useSelector((store: any) => store.userReducer.isLogedIn);
+  const contacts = useSelector((store: any) => store.contactsReducer.contacts);
+
   const dispatch = useDispatch();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +33,7 @@ const ContactsList: FC<IContactsListProps> = ({ contacts }) => {
     dispatch({ type: USER_LOGOUT });
   };
 
-  if (!token) {
+  if (!isLogedIn) {
     return <Redirect to={{ pathname: "/signup" }} />;
   }
 

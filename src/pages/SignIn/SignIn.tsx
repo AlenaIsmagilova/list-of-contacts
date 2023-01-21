@@ -1,12 +1,12 @@
-import { Input, Button } from "@mui/material";
-import { Link, Redirect } from "react-router-dom";
+import { Button, Input } from "@mui/material";
 import { FC } from "react";
+import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../hooks/useForm";
-import styles from "./SignUp.module.css";
-import { signUpThunk } from "../../services/actions/actions";
+import { signInThunk } from "../../services/actions/actions";
+import styles from "./SignIn.module.css";
 
-const SignUp: FC = () => {
+const SignIn: FC = () => {
   const { values, handleChange } = useForm({
     email: "",
     password: "",
@@ -16,7 +16,7 @@ const SignUp: FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(signUpThunk(values.email, values.password));
+    dispatch(signInThunk(values.email, values.password));
   };
 
   if (isLogedIn) {
@@ -38,13 +38,10 @@ const SignUp: FC = () => {
         value={values.password}
       />
       <Button type="submit" variant="contained">
-        Зарегистрироваться
+        Войти
       </Button>
-      <p>
-        Уже есть аккаунт?<Link to="/login">&nbsp;Войти</Link>
-      </p>
     </form>
   );
 };
 
-export default SignUp;
+export default SignIn;

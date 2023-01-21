@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import SignUp from "../../pages/SignUp/SignUp";
-import ContactsPage from "../../pages/Contacts/Contacts";
+import ContactsPage from "../../pages/Contacts/ContactsPage";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { AuthThunk } from "../../services/actions/actions";
+import { authThunk } from "../../services/actions/actions";
+import SignIn from "../../pages/SignIn/SignIn";
 
 function App() {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ function App() {
   const userId = JSON.parse(localStorage.getItem("userInfo") as string)?.userId;
 
   useEffect(() => {
-    dispatch(AuthThunk(token, userId));
+    dispatch(authThunk(token, userId));
   }, []);
 
   return (
@@ -30,6 +31,9 @@ function App() {
             </Route>
             <Route path="/signup">
               <SignUp />
+            </Route>
+            <Route path="/login">
+              <SignIn />
             </Route>
           </Switch>
         </Router>
