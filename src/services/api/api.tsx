@@ -56,3 +56,25 @@ export const getContactsForUser = (token: string, userId: number) => {
     },
   }).then(checkResponse);
 };
+
+export const addContactApi = (
+  firstname: string,
+  secondname: string,
+  telNumber: string,
+  token: string,
+  userId: number
+) => {
+  return fetch(`${baseUrl}/600/contacts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      firstname: firstname,
+      secondname: secondname,
+      telNumber: telNumber,
+      userId,
+    }),
+  }).then(checkResponse);
+};

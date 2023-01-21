@@ -3,23 +3,30 @@ import React, { FC, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Contacts.module.css";
-import { USER_LOGOUT } from "../../services/actions/actions";
+import {
+  USER_LOGOUT,
+  getContactsThunk,
+  addContactThunk,
+} from "../../services/actions/actions";
 
 export interface IContactsList {
   id: number;
   firstname: string;
   secondname: string;
-  phone_number: string;
+  telNumber: string;
   userId: number;
 }
 
 const ContactsList: FC = () => {
   const [inputValue, setInputValue] = useState({
-    name: "",
+    firstname: "",
+    secondname: "",
     telNumber: "",
   });
   const isLogedIn = useSelector((store: any) => store.userReducer.isLogedIn);
   const contacts = useSelector((store: any) => store.contactsReducer.contacts);
+  const token = JSON.parse(localStorage.getItem("userInfo") as string)?.token;
+  const userId = JSON.parse(localStorage.getItem("userInfo") as string)?.userId;
 
   const dispatch = useDispatch();
 
@@ -31,6 +38,19 @@ const ContactsList: FC = () => {
   const handleClick = () => {
     localStorage.removeItem("userInfo");
     dispatch({ type: USER_LOGOUT });
+  };
+
+  const handleAddClick = () => {
+    dispatch(
+      addContactThunk(
+        inputValue.firstname,
+        inputValue.secondname,
+        inputValue.telNumber,
+        token,
+        userId
+      )
+    );
+    setInputValue({ firstname: "", secondname: "", telNumber: "" });
   };
 
   if (!isLogedIn) {
@@ -45,14 +65,14 @@ const ContactsList: FC = () => {
       <ul>
         {contacts.map(
           (
-            { firstname, secondname, phone_number }: IContactsList,
+            { firstname, secondname, telNumber }: IContactsList,
             index: number
           ) => (
             <li key={index}>
               <div>
                 <p>{firstname}</p>
                 <p>{secondname}</p>
-                <p>{phone_number}</p>
+                <p>{telNumber}</p>
               </div>
             </li>
           )
@@ -60,9 +80,15 @@ const ContactsList: FC = () => {
       </ul>
       <form className={styles.form}>
         <Input
-          name="name"
+          name="firstname"
           placeholder="Введите имя"
-          value={inputValue.name}
+          value={inputValue.firstname}
+          onChange={handleInput}
+        />
+        <Input
+          name="secondname"
+          placeholder="Введите фамилию"
+          value={inputValue.secondname}
           onChange={handleInput}
         />
         <Input
@@ -71,7 +97,9 @@ const ContactsList: FC = () => {
           value={inputValue.telNumber}
           onChange={handleInput}
         />
-        <Button variant="contained">Добавить</Button>
+        <Button variant="contained" onClick={handleAddClick}>
+          Добавить
+        </Button>
         <Button variant="contained">Удалить</Button>
       </form>
     </>

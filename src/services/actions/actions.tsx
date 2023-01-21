@@ -6,6 +6,7 @@ import {
   TUser,
 } from "../../utils/types";
 import {
+  addContactApi,
   getContactsForUser,
   getCurrentUser,
   signInApi,
@@ -25,6 +26,23 @@ export const USER_LOGOUT = "USER_LOGOUT";
 export const GET_CONTACTS_REQUEST = "GET_CONTACTS_REQUEST";
 export const GET_CONTACTS_SUCCESS = "GET_CONTACTS_SUCCESS";
 export const GET_CONTACTS_FAILED = "GET_CONTACTS_FAILED";
+
+export const ADD_CONTACT_REQUEST = "ADD_CONTACT_REQUEST";
+export const ADD_CONTACT_SUCCESS = "ADD_CONTACT_SUCCESS";
+export const ADD_CONTACT_FAILED = "ADD_CONTACT_FAILED";
+
+interface IAddContactRequest {
+  readonly type: typeof ADD_CONTACT_REQUEST;
+}
+
+interface IAddContactSuccess {
+  readonly type: typeof ADD_CONTACT_SUCCESS;
+  readonly payload: IContactsList;
+}
+
+interface IAddContactFailed {
+  readonly type: typeof ADD_CONTACT_FAILED;
+}
 
 interface IGetContactsRequest {
   readonly type: typeof GET_CONTACTS_REQUEST;
@@ -83,7 +101,10 @@ export type TAllUserActions =
 export type TAllContactsActions =
   | IGetContactsRequest
   | IGetContactsSuccess
-  | IGetContactsFailed;
+  | IGetContactsFailed
+  | IAddContactRequest
+  | IAddContactSuccess
+  | IAddContactFailed;
 
 export type TAllActions = TAllContactsActions | TAllUserActions;
 
@@ -157,6 +178,29 @@ export const getContactsThunk = (token: string, userId: number) => {
         console.error("Error in getContactsForUser", error);
         return dispatch({
           type: GET_CONTACTS_FAILED,
+        });
+      });
+  };
+};
+
+export const addContactThunk = (
+  firstname: string,
+  secondname: string,
+  telNumber: string,
+  token: string,
+  userId: number
+) => {
+  return function (dispatch: AppDispatch) {
+    dispatch({ type: ADD_CONTACT_REQUEST });
+    return addContactApi(firstname, secondname, telNumber, token, userId)
+      .then((res) => {
+        console.log(res);
+        dispatch({ type: ADD_CONTACT_SUCCESS, payload: res });
+      })
+      .catch((error) => {
+        console.error("Error in addContactApi", error);
+        return dispatch({
+          type: ADD_CONTACT_FAILED,
         });
       });
   };

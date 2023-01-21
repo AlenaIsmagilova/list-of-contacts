@@ -1,5 +1,10 @@
 import { IContactsList } from "../../components/contacts/ContactsList";
-import { TAllContactsActions } from "../actions/actions";
+import {
+  ADD_CONTACT_FAILED,
+  ADD_CONTACT_REQUEST,
+  ADD_CONTACT_SUCCESS,
+  TAllContactsActions,
+} from "../actions/actions";
 import {
   GET_CONTACTS_REQUEST,
   GET_CONTACTS_SUCCESS,
@@ -37,6 +42,27 @@ export const contactsReducer = (
       };
     }
     case GET_CONTACTS_FAILED: {
+      return {
+        ...state,
+        error: true,
+      };
+    }
+    case ADD_CONTACT_REQUEST: {
+      return {
+        ...state,
+        isLoading: true,
+        error: false,
+      };
+    }
+    case ADD_CONTACT_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        error: false,
+        contacts: [...state.contacts, action.payload],
+      };
+    }
+    case ADD_CONTACT_FAILED: {
       return {
         ...state,
         error: true,
