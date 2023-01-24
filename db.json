@@ -19,6 +19,21 @@
       "email": "alena.zaripova@inbox.ru",
       "password": "$2a$10$CNJCB2JWI3XElGYuSUWaJe91Bf6ajH8lVpcAHxH4CNWDGWA8jK7Gy",
       "id": 4
+    },
+    {
+      "email": "x@x.com",
+      "password": "$2a$10$kUndXVp3KiZrt3mw9fxllOCk1T4jpspN/uOVLgp/e1gM/HhqV4w.G",
+      "id": 5
+    },
+    {
+      "email": "z@z.com",
+      "password": "$2a$10$KMklng4i6DBMmn5fdk658OJd2XKiiPIAieC76fIasK/YORPU1mivi",
+      "id": 6
+    },
+    {
+      "email": "v@v.com",
+      "password": "$2a$10$kuJqCSQIHGKsRU/kHx42SeKlOcOb8V97K8kVTDVKALjfcHwfmW9Ie",
+      "id": 7
     }
   ],
   "contacts": [
@@ -41,6 +56,27 @@
       "secondname": "gfgfgffg",
       "phone_number": 54545454546456,
       "userId": 3
+    },
+    {
+      "firstname": "alena",
+      "secondname": "fn",
+      "telNumber": "8 (911) 941-35-83",
+      "userId": 2,
+      "id": 4
+    },
+    {
+      "firstname": "ddd",
+      "secondname": "fgffdsf",
+      "telNumber": "12345667889",
+      "userId": 6,
+      "id": 5
+    },
+    {
+      "firstname": "alena",
+      "secondname": "fn",
+      "telNumber": "8 (911) 941-35-83",
+      "userId": 6,
+      "id": 6
     }
   ]
 }

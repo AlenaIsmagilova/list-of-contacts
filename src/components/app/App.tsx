@@ -6,12 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { authThunk } from "../../services/actions/actions";
 import SignIn from "../../pages/SignIn/SignIn";
+import Spinner from "../spinner/Spinner";
 
 function App() {
   const dispatch = useDispatch();
   const { isLoading: userLoader } = useSelector(
     (store: any) => store.userReducer
   );
+
   const token = JSON.parse(localStorage.getItem("userInfo") as string)?.token;
   const userId = JSON.parse(localStorage.getItem("userInfo") as string)?.userId;
 
@@ -22,7 +24,7 @@ function App() {
   return (
     <>
       {userLoader ? (
-        <p>...LOADING</p>
+        <Spinner />
       ) : (
         <Router>
           <Switch>

@@ -3,11 +3,12 @@ import { Edit as EditIcon } from "@material-ui/icons";
 import { Delete as DeleteIcon } from "@material-ui/icons";
 import { FC, useState } from "react";
 import { IContactsList } from "../contacts/ContactsList";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   deleteContactThunk,
   editContactThunk,
 } from "../../services/actions/actions";
+import Spinner from "../spinner/Spinner";
 
 interface IContactItemProps extends IContactsList {}
 

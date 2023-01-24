@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./Contacts.module.css";
 import { USER_LOGOUT, addContactThunk } from "../../services/actions/actions";
 import ContactItem from "../contactItem/ContactItem";
+import Spinner from "../spinner/Spinner";
 
 export interface IContactsList {
   id: number;
@@ -26,7 +27,9 @@ const ContactsList: FC = () => {
   const userId = JSON.parse(localStorage.getItem("userInfo") as string)?.userId;
 
   const dispatch = useDispatch();
-
+  const { isLoading: contactsLoader } = useSelector(
+    (store: any) => store.contactsReducer
+  );
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setInputValue({ ...inputValue, [e.target.name]: e.target.value });
@@ -56,45 +59,51 @@ const ContactsList: FC = () => {
 
   return (
     <>
-      <Button variant="outlined" onClick={handleClick}>
-        Выйти из профиля
-      </Button>
-      <ul>
-        {contacts.map(
-          ({ firstname, secondname, telNumber, id }: IContactsList) => (
-            <ContactItem
-              firstname={firstname}
-              secondname={secondname}
-              telNumber={telNumber}
-              id={id}
+      {contactsLoader ? (
+        <Spinner />
+      ) : (
+        <>
+          <Button variant="outlined" onClick={handleClick}>
+            Выйти из профиля
+          </Button>
+          <ul>
+            {contacts.map(
+              ({ firstname, secondname, telNumber, id }: IContactsList) => (
+                <ContactItem
+                  firstname={firstname}
+                  secondname={secondname}
+                  telNumber={telNumber}
+                  id={id}
+                />
+              )
+            )}
+          </ul>
+          <form className={styles.form}>
+            <Input
+              name="firstname"
+              placeholder="Введите имя"
+              value={inputValue.firstname}
+              onChange={handleInput}
             />
-          )
-        )}
-      </ul>
-      <form className={styles.form}>
-        <Input
-          name="firstname"
-          placeholder="Введите имя"
-          value={inputValue.firstname}
-          onChange={handleInput}
-        />
-        <Input
-          name="secondname"
-          placeholder="Введите фамилию"
-          value={inputValue.secondname}
-          onChange={handleInput}
-        />
-        <Input
-          name="telNumber"
-          placeholder="Введите номер телефона"
-          value={inputValue.telNumber}
-          onChange={handleInput}
-        />
-        <Button variant="contained" onClick={handleAddClick}>
-          Добавить
-        </Button>
-        <Button variant="contained">Удалить</Button>
-      </form>
+            <Input
+              name="secondname"
+              placeholder="Введите фамилию"
+              value={inputValue.secondname}
+              onChange={handleInput}
+            />
+            <Input
+              name="telNumber"
+              placeholder="Введите номер телефона"
+              value={inputValue.telNumber}
+              onChange={handleInput}
+            />
+            <Button variant="contained" onClick={handleAddClick}>
+              Добавить
+            </Button>
+            <Button variant="contained">Удалить</Button>
+          </form>
+        </>
+      )}
     </>
   );
 };

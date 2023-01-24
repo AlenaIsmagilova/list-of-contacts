@@ -9,6 +9,7 @@ import {
   EDIT_CONTACT_REQUEST,
   EDIT_CONTACT_SUCCESS,
   TAllContactsActions,
+  USER_LOGOUT,
 } from "../actions/actions";
 import {
   GET_CONTACTS_REQUEST,
@@ -57,6 +58,7 @@ export const contactsReducer = (
     case GET_CONTACTS_FAILED: {
       return {
         ...state,
+        isLoading: false,
         error: true,
       };
     }
@@ -128,6 +130,12 @@ export const contactsReducer = (
       return {
         ...state,
         error: true,
+      };
+    }
+    case USER_LOGOUT: {
+      return {
+        ...state,
+        contacts: [],
       };
     }
     default:

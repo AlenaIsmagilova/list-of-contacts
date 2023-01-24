@@ -147,7 +147,8 @@ export type TAllContactsActions =
   | IDeleteContactFailed
   | IEditConctactRequest
   | IEditConctactSuccess
-  | IEditContactFailed;
+  | IEditContactFailed
+  | IUserLogout;
 
 export type TAllActions = TAllContactsActions | TAllUserActions;
 
