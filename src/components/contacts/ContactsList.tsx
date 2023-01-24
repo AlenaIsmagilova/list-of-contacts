@@ -3,18 +3,15 @@ import React, { FC, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Contacts.module.css";
-import {
-  USER_LOGOUT,
-  getContactsThunk,
-  addContactThunk,
-} from "../../services/actions/actions";
+import { USER_LOGOUT, addContactThunk } from "../../services/actions/actions";
+import ContactItem from "../contactItem/ContactItem";
 
 export interface IContactsList {
   id: number;
-  firstname: string;
-  secondname: string;
-  telNumber: string;
-  userId: number;
+  firstname?: string;
+  secondname?: string;
+  telNumber?: string;
+  userId?: number;
 }
 
 const ContactsList: FC = () => {
@@ -64,17 +61,13 @@ const ContactsList: FC = () => {
       </Button>
       <ul>
         {contacts.map(
-          (
-            { firstname, secondname, telNumber }: IContactsList,
-            index: number
-          ) => (
-            <li key={index}>
-              <div>
-                <p>{firstname}</p>
-                <p>{secondname}</p>
-                <p>{telNumber}</p>
-              </div>
-            </li>
+          ({ firstname, secondname, telNumber, id }: IContactsList) => (
+            <ContactItem
+              firstname={firstname}
+              secondname={secondname}
+              telNumber={telNumber}
+              id={id}
+            />
           )
         )}
       </ul>

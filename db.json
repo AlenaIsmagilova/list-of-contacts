@@ -31,9 +31,8 @@
     },
     {
       "id": 2,
-      "firstname": "Gleb",
-      "secondname": "Krasikov",
-      "phone_number": 74973097404,
+      "firstname": "Glebgrgvvvvbbbbccc",
+      "secondname": "Krasikovggg",
       "userId": 2
     },
     {
@@ -42,34 +41,6 @@
       "secondname": "gfgfgffg",
       "phone_number": 54545454546456,
       "userId": 3
-    },
-    {
-      "firstname": "Romeo",
-      "secondname": "Gismagalov",
-      "telNumber": "909066633",
-      "userId": 2,
-      "id": 4
-    },
-    {
-      "firstname": "alena",
-      "secondname": "affajkl",
-      "telNumber": "8 (911) 941-35-83",
-      "userId": 2,
-      "id": 5
-    },
-    {
-      "firstname": "alena",
-      "secondname": "bnc cbn",
-      "telNumber": "747474747474",
-      "userId": 2,
-      "id": 6
-    },
-    {
-      "firstname": "alena",
-      "secondname": "fn",
-      "telNumber": "32435467",
-      "userId": 2,
-      "id": 7
     }
   ]
 }

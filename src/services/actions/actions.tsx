@@ -1,12 +1,15 @@
 import { IContactsList } from "../../components/contacts/ContactsList";
 import {
   AppDispatch,
+  IUpdatedContactsList,
   TCurrentUser,
   TRegistrationUser,
   TUser,
 } from "../../utils/types";
 import {
   addContactApi,
+  deleteContactApi,
+  editContactApi,
   getContactsForUser,
   getCurrentUser,
   signInApi,
@@ -30,6 +33,40 @@ export const GET_CONTACTS_FAILED = "GET_CONTACTS_FAILED";
 export const ADD_CONTACT_REQUEST = "ADD_CONTACT_REQUEST";
 export const ADD_CONTACT_SUCCESS = "ADD_CONTACT_SUCCESS";
 export const ADD_CONTACT_FAILED = "ADD_CONTACT_FAILED";
+
+export const DELETE_CONTACT_REQUEST = "DELETE_CONTACT_REQUEST";
+export const DELETE_CONTACT_SUCCESS = "DELETE_CONTACT_SUCCESS";
+export const DELETE_CONTACT_FAILED = "DELETE_CONTACT_FAILED";
+
+export const EDIT_CONTACT_REQUEST = "EDIT_CONTACT_REQUEST";
+export const EDIT_CONTACT_SUCCESS = "EDIT_CONTACT_SUCCESS";
+export const EDIT_CONTACT_FAILED = "EDIT_CONTACT_FAILED";
+
+interface IEditConctactRequest {
+  readonly type: typeof EDIT_CONTACT_REQUEST;
+}
+
+interface IEditConctactSuccess {
+  readonly type: typeof EDIT_CONTACT_SUCCESS;
+  readonly payload: IContactsList;
+}
+
+interface IEditContactFailed {
+  readonly type: typeof EDIT_CONTACT_FAILED;
+}
+
+interface IDeleteConctactRequest {
+  readonly type: typeof DELETE_CONTACT_REQUEST;
+}
+
+interface IDeleteConctactSuccess {
+  readonly type: typeof DELETE_CONTACT_SUCCESS;
+  readonly payload: IContactsList;
+}
+
+interface IDeleteContactFailed {
+  readonly type: typeof DELETE_CONTACT_FAILED;
+}
 
 interface IAddContactRequest {
   readonly type: typeof ADD_CONTACT_REQUEST;
@@ -104,7 +141,13 @@ export type TAllContactsActions =
   | IGetContactsFailed
   | IAddContactRequest
   | IAddContactSuccess
-  | IAddContactFailed;
+  | IAddContactFailed
+  | IDeleteConctactRequest
+  | IDeleteConctactSuccess
+  | IDeleteContactFailed
+  | IEditConctactRequest
+  | IEditConctactSuccess
+  | IEditContactFailed;
 
 export type TAllActions = TAllContactsActions | TAllUserActions;
 
@@ -194,13 +237,53 @@ export const addContactThunk = (
     dispatch({ type: ADD_CONTACT_REQUEST });
     return addContactApi(firstname, secondname, telNumber, token, userId)
       .then((res) => {
-        console.log(res);
         dispatch({ type: ADD_CONTACT_SUCCESS, payload: res });
       })
       .catch((error) => {
         console.error("Error in addContactApi", error);
         return dispatch({
           type: ADD_CONTACT_FAILED,
+        });
+      });
+  };
+};
+
+export const deleteContactThunk = (contactId: number, token: string) => {
+  return function (dispatch: AppDispatch) {
+    dispatch({ type: DELETE_CONTACT_REQUEST });
+    return deleteContactApi(contactId, token)
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: DELETE_CONTACT_SUCCESS,
+          payload: { id: contactId } as any,
+        });
+      })
+      .catch((error) => {
+        console.error("Error in deleteContactApi", error);
+        return dispatch({
+          type: DELETE_CONTACT_FAILED,
+        });
+      });
+  };
+};
+
+export const editContactThunk = (
+  contactId: number,
+  token: string,
+  contact: IContactsList
+) => {
+  return function (dispatch: AppDispatch) {
+    dispatch({ type: EDIT_CONTACT_REQUEST });
+    return editContactApi(contactId, token, contact)
+      .then((res) => {
+        console.log(res);
+        dispatch({ type: EDIT_CONTACT_SUCCESS, payload: res });
+      })
+      .catch((error) => {
+        console.error("Error in deleteContactApi", error);
+        return dispatch({
+          type: EDIT_CONTACT_FAILED,
         });
       });
   };

@@ -1,4 +1,6 @@
 import { baseUrl } from "../../constants/constants";
+import { IUpdatedContactsList } from "../../utils/types";
+import { IContactsList } from "../reducers/contactsReducer";
 
 const checkResponse = (res: Response) => {
   if (res.ok) {
@@ -76,5 +78,30 @@ export const addContactApi = (
       telNumber: telNumber,
       userId,
     }),
+  }).then(checkResponse);
+};
+
+export const deleteContactApi = (contactId: number, token: string) => {
+  return fetch(`${baseUrl}/600/contacts/${contactId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+};
+
+export const editContactApi = (
+  contactId: number,
+  token: string,
+  contact: IContactsList
+) => {
+  return fetch(`${baseUrl}/600/contacts/${contactId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(contact),
   }).then(checkResponse);
 };

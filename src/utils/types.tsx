@@ -19,6 +19,14 @@ export type TCurrentUser = {
   readonly user: TUser;
 };
 
+export interface IUpdatedContactsList {
+  id?: number;
+  newFirstname?: string;
+  newSecondname?: string;
+  newTelNumber?: string;
+  userId?: number;
+}
+
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 
