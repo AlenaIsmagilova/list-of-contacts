@@ -21,6 +21,7 @@ const ContactsList: FC = () => {
     secondname: "",
     telNumber: "",
   });
+
   const isLogedIn = useSelector((store: any) => store.userReducer.isLogedIn);
   const contacts = useSelector((store: any) => store.contactsReducer.contacts);
   const token = JSON.parse(localStorage.getItem("userInfo") as string)?.token;
@@ -100,7 +101,6 @@ const ContactsList: FC = () => {
             <Button variant="contained" onClick={handleAddClick}>
               Добавить
             </Button>
-            <Button variant="contained">Удалить</Button>
           </form>
         </>
       )}

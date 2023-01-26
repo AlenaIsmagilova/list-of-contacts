@@ -1,7 +1,6 @@
 import { IContactsList } from "../../components/contacts/ContactsList";
 import {
   AppDispatch,
-  IUpdatedContactsList,
   TCurrentUser,
   TRegistrationUser,
   TUser,

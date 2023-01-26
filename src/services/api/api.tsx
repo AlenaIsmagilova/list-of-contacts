@@ -1,5 +1,4 @@
 import { baseUrl } from "../../constants/constants";
-import { IUpdatedContactsList } from "../../utils/types";
 import { IContactsList } from "../reducers/contactsReducer";
 
 const checkResponse = (res: Response) => {

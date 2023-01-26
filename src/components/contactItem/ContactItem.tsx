@@ -3,12 +3,10 @@ import { Edit as EditIcon } from "@material-ui/icons";
 import { Delete as DeleteIcon } from "@material-ui/icons";
 import { FC, useState } from "react";
 import { IContactsList } from "../contacts/ContactsList";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteContactThunk,
-  editContactThunk,
-} from "../../services/actions/actions";
-import Spinner from "../spinner/Spinner";
+import { useDispatch } from "react-redux";
+import { editContactThunk } from "../../services/actions/actions";
+import Modal from "../modal/Modal";
+import ContactDeletingAgreement from "../contactDeleting/ContactDeletingAgreement";
 
 interface IContactItemProps extends IContactsList {}
 
@@ -19,6 +17,7 @@ const ContactItem: FC<IContactItemProps> = ({
   id,
 }) => {
   const [isEdit, setIsEdit] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [inputValue, setInputValue] = useState<{
     [key: string]: string | undefined;
   }>({
@@ -29,10 +28,6 @@ const ContactItem: FC<IContactItemProps> = ({
   const token = JSON.parse(localStorage.getItem("userInfo") as string)?.token;
   const userId = JSON.parse(localStorage.getItem("userInfo") as string)?.userId;
   const dispatch = useDispatch();
-
-  const hadleDeleteClick = (contactId: number) => {
-    dispatch(deleteContactThunk(contactId, token));
-  };
 
   const handleEditClick = () => {
     setIsEdit(true);
@@ -94,6 +89,13 @@ const ContactItem: FC<IContactItemProps> = ({
           >
             Отменить изменения
           </Button>
+          <Modal open={openModal} handleClose={() => setOpenModal(false)}>
+            <ContactDeletingAgreement
+              firstnameOfContact={inputValue.firstname}
+              id={id}
+              handleCloseClickOnBtn={() => setOpenModal(false)}
+            />
+          </Modal>
         </>
       ) : (
         <>
@@ -117,11 +119,19 @@ const ContactItem: FC<IContactItemProps> = ({
             color="primary"
             aria-label="delete contact"
             onClick={() => {
-              hadleDeleteClick(id);
+              setOpenModal(true);
             }}
           >
             <DeleteIcon></DeleteIcon>
           </IconButton>
+          <Modal open={openModal} handleClose={() => setOpenModal(false)}>
+            <ContactDeletingAgreement
+              firstnameOfContact={firstname}
+              secondnameOfContact={secondname}
+              id={id}
+              handleCloseClickOnBtn={() => setOpenModal(false)}
+            />
+          </Modal>
         </>
       )}
     </>

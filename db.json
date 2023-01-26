@@ -45,24 +45,11 @@
       "userId": 3
     },
     {
-      "id": 2,
-      "firstname": "Glebgrgvvvvbbbbccc",
-      "secondname": "Krasikovggg",
-      "userId": 2
-    },
-    {
       "id": 3,
       "firstname": "fdfd",
       "secondname": "gfgfgffg",
       "phone_number": 54545454546456,
       "userId": 3
-    },
-    {
-      "firstname": "alena",
-      "secondname": "fn",
-      "telNumber": "8 (911) 941-35-83",
-      "userId": 2,
-      "id": 4
     },
     {
       "firstname": "ddd",
@@ -77,6 +64,20 @@
       "telNumber": "8 (911) 941-35-83",
       "userId": 6,
       "id": 6
+    },
+    {
+      "firstname": "alena",
+      "secondname": "fn",
+      "telNumber": "3456454",
+      "userId": 2,
+      "id": 8
+    },
+    {
+      "firstname": "Rom",
+      "secondname": "bnc cbn",
+      "telNumber": "8 (911) 941-35-83",
+      "userId": 2,
+      "id": 9
     }
   ]
 }
