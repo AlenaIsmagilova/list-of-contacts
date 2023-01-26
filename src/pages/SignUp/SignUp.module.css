@@ -1,5 +1,13 @@
 form {
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  min-width: 400px;
+  padding: 50px;
+  gap: 10px;
+}
+
+.text {
+  text-align: center;
+  margin: 0;
+  padding-top: 15px;
 }

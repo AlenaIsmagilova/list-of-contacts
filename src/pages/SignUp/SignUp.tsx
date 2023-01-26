@@ -40,8 +40,8 @@ const SignUp: FC = () => {
       <Button type="submit" variant="contained">
         Зарегистрироваться
       </Button>
-      <p>
-        Уже есть аккаунт?<Link to="/login">&nbsp;Войти</Link>
+      <p className={styles.text}>
+        Уже есть аккаунт?&nbsp;<Link to="/login">Войти</Link>
       </p>
     </form>
   );

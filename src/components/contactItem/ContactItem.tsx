@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { editContactThunk } from "../../services/actions/actions";
 import Modal from "../modal/Modal";
 import ContactDeletingAgreement from "../contactDeleting/ContactDeletingAgreement";
+import styles from "./ContactItem.module.css";
 
 interface IContactItemProps extends IContactsList {}
 
@@ -61,7 +62,7 @@ const ContactItem: FC<IContactItemProps> = ({
       {isEdit ? (
         <>
           <li key={id}>
-            <div>
+            <div className={styles.editInputsWrapper}>
               <Input
                 name="firstname"
                 value={inputValue.firstname}
@@ -99,31 +100,35 @@ const ContactItem: FC<IContactItemProps> = ({
         </>
       ) : (
         <>
-          <li key={id}>
-            <div>
-              <p>{firstname}</p>
-              <p>{secondname}</p>
-              <p>{telNumber}</p>
+          <div className={styles.itemWrapper}>
+            <li key={id}>
+              <div>
+                <p>{firstname}</p>
+                <p>{secondname}</p>
+                <p>{telNumber}</p>
+              </div>
+            </li>
+            <div className={styles.iconButtonWrapper}>
+              <IconButton
+                color="primary"
+                aria-label="edit contact"
+                onClick={() => {
+                  handleEditClick();
+                }}
+              >
+                <EditIcon></EditIcon>
+              </IconButton>
+              <IconButton
+                color="primary"
+                aria-label="delete contact"
+                onClick={() => {
+                  setOpenModal(true);
+                }}
+              >
+                <DeleteIcon></DeleteIcon>
+              </IconButton>
             </div>
-          </li>
-          <IconButton
-            color="primary"
-            aria-label="edit contact"
-            onClick={() => {
-              handleEditClick();
-            }}
-          >
-            <EditIcon></EditIcon>
-          </IconButton>
-          <IconButton
-            color="primary"
-            aria-label="delete contact"
-            onClick={() => {
-              setOpenModal(true);
-            }}
-          >
-            <DeleteIcon></DeleteIcon>
-          </IconButton>
+          </div>
           <Modal open={openModal} handleClose={() => setOpenModal(false)}>
             <ContactDeletingAgreement
               firstnameOfContact={firstname}

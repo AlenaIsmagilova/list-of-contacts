@@ -67,7 +67,7 @@ const ContactsList: FC = () => {
           <Button variant="outlined" onClick={handleClick}>
             Выйти из профиля
           </Button>
-          <ul>
+          <ul className={styles.itemsList}>
             {contacts.map(
               ({ firstname, secondname, telNumber, id }: IContactsList) => (
                 <ContactItem
@@ -80,6 +80,7 @@ const ContactsList: FC = () => {
             )}
           </ul>
           <form className={styles.form}>
+            <p>Добавить новый контакт в свой список контактов: </p>
             <Input
               name="firstname"
               placeholder="Введите имя"
